@@ -3,6 +3,7 @@
 
 # Make sure these values align with those in the init script
 GIT_PATH=/opt/cjdns
+BASE_PATH=/opt
 CJDNS_CONFIG=/etc/cjdroute.conf
 
 Usage() {
@@ -20,17 +21,20 @@ RootCheck() {
 }
 
 Setup() {
+    CURRENT_PATH=`pwd`
     echo "Create cjdns installation folder if it does not exist: $GIT_PATH."
-    mkdir -p $GIT_PATH
-    cp cjdns.sh $GIT_PATH/
+    #mkdir -p $GIT_PATH
+    #cp cjdns.sh $GIT_PATH/
     echo "Ensuring you have the required software: cmake make git build-essential"
     # Hopefully you are on ubuntu/debian
     apt-get install -y cmake make git build-essential
     echo "Cloning from github..."
-    cd $GIT_PATH/../
+    #cd $GIT_PATH/../
+    cd $BASE_PATH 
     git clone https://github.com/cjdelisle/cjdns.git cjdns
     echo "Compiling software..."
     cd $GIT_PATH
+    cp $CURRENT_PATH/cjdns.sh $GIT_PATH/
     ./do
 
     if [ -f $CJDNS_CONFIG ]; then #check if config file already exist.
