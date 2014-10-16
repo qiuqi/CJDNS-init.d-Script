@@ -22,6 +22,7 @@ RootCheck() {
 Setup() {
     echo "Create cjdns installation folder if it does not exist: $GIT_PATH."
     mkdir -p $GIT_PATH
+    cp cjdns.sh $GIT_PATH/
     echo "Ensuring you have the required software: cmake make git build-essential"
     # Hopefully you are on ubuntu/debian
     apt-get install -y cmake make git build-essential
